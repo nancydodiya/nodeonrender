@@ -10,6 +10,7 @@ const uploadRoutes = require("./routes/UploadRoutes");
 const studentRoutes = require("./routes/StudentRoutes1");
 const studentRoute = require("./routes/StudentRoutes");
 const signupRoutes = require("./routes/SignupRoutes");
+const PUploadRoutes = require("./routes/PUploadRouts")
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 require('dotenv').config()
@@ -22,8 +23,9 @@ app.use('/product',productRoutes)
 app.use('/cart', cartRoutes)
 app.use('/upload', uploadRoutes)
 app.use('/student',studentRoute)
+app.use('/pupload', PUploadRoutes)
 
-app.use('/students1',studentRoutes)
+//app.use('/students1',studentRoutes)
 app.use('/signup', signupRoutes)
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

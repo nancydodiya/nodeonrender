@@ -1,7 +1,9 @@
 const StudentsSchema=require("../model/StudentsSchema");
 const mailer= require("../util/Mailer");
+const generatetokens = require("../util/GenerateToken")
 exports.createStudent = (req,res)=>{
     const Student = new StudentsSchema(req.body);
+
 
 Student.save((err,data)=>{
 
@@ -154,5 +156,23 @@ exports.forgetPass =(req, res)=>{
             })
         }
 
+    })
+}
+exports.login = (req,res)=>{
+    email=req.body.email
+    StudentsSchema.find({email}, (err,data)=>{
+        console.log(data);
+        if(err){
+            res.status(401).json({
+                err:"error"
+    
+            })
+        }else{
+            var token = generatetokens.generatetokens(data)
+            res.status(200).json({
+                msg:"login successfully",
+                token:token
+            })
+        }
     })
 }
